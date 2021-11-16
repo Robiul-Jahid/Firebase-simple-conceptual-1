@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import initializeFirebase from './Firebase/Firebase.init';
+import Login from './LoginAndRegister/Login/Login';
+import Register from './LoginAndRegister/Register/Register';
 
+
+initializeFirebase();
 function App() {
+  const [toggle, setToggle] = useState(false);
+
+  console.log(toggle);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='m-5 login-area'>
+      {toggle?<Login></Login>:
+      <Register></Register>}
+       {toggle? <p className='para mt-5' onClick= {() => setToggle(false)}>Are you new? Please Register</p>:
+        <p className='para mt-5' onClick = {() => setToggle(true)}>Already have an Account?</p>}
+      </div>
     </div>
   );
 }
